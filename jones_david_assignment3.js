@@ -103,43 +103,33 @@ var loot = function(item1, item2, item3){
 	return spoilsOfWar;											// Return String
 }; //End of loot function
 
-var buildGroupArray = function(){
+// Function to build an array of group member names and output thanks to each.
+var thankGroup = function(){
 	var x = 0;
 	var	grpMemNames = [];
 	
 	for (var key in players.groupMembers){
 		var mem = players.groupMembers[key];
 		grpMemNames[x] = mem.name;
-		console.log("Added " + mem.name + " to the array.");
+		console.log("Thank you " + mem.name + " for the group.");
 		x++;
 	}
 	return grpMemNames;											// Return Array
-}; // End of buildGroupArray
+}; // End of thankGroup
 
 //Main Code
 
 players.groupMembers[1].targetSpotted(tgtSpot);
+
 players.groupMembers[3].wardGroup(players.groupMembers[3].warding);
+
 players.groupMembers[1].groupSet(groupSize, players.groupMembers[3].warding);
 
-//var rdyToPull = players.groupMembers[3].wardGroup(players.groupMembers[3].warding);
+console.log(dpsNeeded(hitPoints));
 
+console.log(loot(loot1, loot2, loot3));
 
+console.log(thankGroup());
 
+console.log("On to greater victories!");
 
-
-//var gmn = grpMemNames;
-//console.log(grpMemNames);
-
-//players.groupMembers[1].targetSpotted(true);
-//console.log(players.groupMembers[3].warding);
-
-
-/*
-
-for (var key in players.groupMembers){
-	var member = players.groupMembers[key];
-	console.log("Hello " + member.name + ".");
-};
-
-*/
