@@ -5,12 +5,12 @@
 // Project 3
 
 //Global Variables
-var groupSize = 6,
-	hitPoints = 27000,
-	mobName = "Avatar of Fear",
-	loot1 = "Coif of Enlivened Chance",
-	loot2 = "Bangle of Demise",
-	loot3 = "Corrupted Plate Greaves of Sorrow"
+var groupSize 	= 6,
+	hitPoints 	= 27000,
+	mobName 	= "Avatar of Fear",
+	loot1 		= "Coif of Enlivened Chance",
+	loot2 		= "Bangle of Demise",
+	loot3 		= "Corrupted Plate Greaves of Sorrow"
 ; // End of Global Variables
 
 // JSON Data
@@ -29,10 +29,10 @@ var players = {
 			},
 			getSet: function(){
 				var set = true;
+				return set;											// Return Boolean
 			},
 			groupSet: function(numGroupMembers, warded){
 				if (numGroupMembers === 6 && warded === true){
-					count = 10;
 					var countDown = function(){
 						for (var x = 10; x > 0; x--){
 							if (x != 1){
@@ -43,12 +43,12 @@ var players = {
 					}; // End of countDown
 					var readyToPull = "We are ready to pull!";
 					countDown();
-					return readyToPull;
+					return readyToPull;								// Return String
 				} else {
 					var readyToPull = "You guys are fail. We aren't ready yet.";
 					return readyToPull;
 				}
-			}; // End of groupSet method
+			} // End of groupSet method
 		},
 		"2": {
 			"name": "Attricane",
@@ -62,7 +62,7 @@ var players = {
 				if (ready === true){
 					var wardingGroup = true;
 					console.log("Warding now!");
-					return wardingGroup;
+					return wardingGroup;							// Return Boolean
 				} else {
 					var wardingGroup = false;
 					console.log("Hang on! I can't find my ward.");
@@ -85,6 +85,38 @@ var players = {
 	} //End of groupMembers object
 }; // End of players Variable (JSON)
 
+// Number function to calculate dps (Damage Per Second) needed to kill mob before wipe.
+var dpsNeeded = function(hitPoints){
+	var timeToWipe = 60;
+	var dps = hitPoints/timeToWipe;
+	while (hitPoints > 0){
+		console.log ("Damaging " + mobName + " by " + dps + " damage per second!");
+		console.log (hitPoints + " health left!");
+		hitPoints -= dps;
+	}
+	var mobDefeated = "We have destroyed " + mobName + " in " + timeToWipe +
+		" seconds, at " + dps + " damage per second!";
+	return mobDefeated;											// Return String
+}; // End of dpsNeeded function
+
+// String function telling what was in the treasure chest from the kill.
+var loot = function(item1, item2, item3){
+	var spoilsOfWar = "The treasure chest contains the " + item1 + ", a " + item2 +
+		", and the " + item3 + ". Hooray!";
+	return spoilsOfWar;											// Return String
+}; //End of loot function
+
+var buildGroupArray = function(){
+	var x = 0;
+	var	grpMemNames = [];
+	
+	for (var key in players.groupMembers){
+		var mem = players.groupMembers[key];
+		grpMemNames[x] = mem.name;
+		x++;
+	}
+	return grpMemNames;											// Return Array
+};
 
 //players.groupMembers[1].targetSpotted(true);
 //console.log(players.groupMembers[3].warding);
