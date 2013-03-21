@@ -10,7 +10,8 @@ var groupSize 	= 6,
 	mobName 	= "Avatar of Fear",
 	loot1 		= "Coif of Enlivened Chance",
 	loot2 		= "Bangle of Demise",
-	loot3 		= "Corrupted Plate Greaves of Sorrow"
+	loot3 		= "Corrupted Plate Greaves of Sorrow",
+	tgtSpot		= true
 ; // End of Global Variables
 
 // JSON Data
@@ -26,10 +27,6 @@ var players = {
 				} else {
 					console.log("Let's wait for a respawn.");
 				}
-			},
-			getSet: function(){
-				var set = true;
-				return set;											// Return Boolean
 			},
 			groupSet: function(numGroupMembers, warded){
 				if (numGroupMembers === 6 && warded === true){
@@ -113,10 +110,26 @@ var buildGroupArray = function(){
 	for (var key in players.groupMembers){
 		var mem = players.groupMembers[key];
 		grpMemNames[x] = mem.name;
+		console.log("Added " + mem.name + " to the array.");
 		x++;
 	}
 	return grpMemNames;											// Return Array
-};
+}; // End of buildGroupArray
+
+//Main Code
+
+players.groupMembers[1].targetSpotted(tgtSpot);
+players.groupMembers[3].wardGroup(players.groupMembers[3].warding);
+players.groupMembers[1].groupSet(groupSize, players.groupMembers[3].warding);
+
+//var rdyToPull = players.groupMembers[3].wardGroup(players.groupMembers[3].warding);
+
+
+
+
+
+//var gmn = grpMemNames;
+//console.log(grpMemNames);
 
 //players.groupMembers[1].targetSpotted(true);
 //console.log(players.groupMembers[3].warding);
